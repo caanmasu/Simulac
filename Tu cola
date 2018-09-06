@@ -1,0 +1,34 @@
+from random import random
+
+def Cola1Servidor():
+    i=0
+    Clientes = []
+    TLlegada = []
+    TEspera = []
+    TServicio = []
+    TOCIO = []
+    TSalida = []
+    NUM_CLIENTES = 1000
+    while (i<NUM_CLIENTES):
+        if(i==0):
+            Clientes.append(i)
+            TLlegada.append(i)
+            TEspera.append(i)
+            TServicio.append(random())
+            TOCIO.append(i)
+            TSalida.append(TLlegada[i]+TEspera[i]+TServicio[i])
+        if(i>=1):
+            Clientes.append(i)
+            TLlegada.append(TLlegada[i-1]+random())
+            TEspera.append(max(TSalida[i-1],TLlegada[i])-TLlegada[i])
+            TServicio.append(random())
+            TOCIO.append(max(TSalida[i-1],TLlegada[i])-TSalida[i-1])
+            TSalida.append(TLlegada[i]+TEspera[i]+TServicio[i])
+        i = i + 1
+    i = 0
+    print ("Cliente\tLlegada\tEspera\tServic\tSalida")
+    while(i<NUM_CLIENTES):
+        print (str(Clientes[i]+1)+"\t"+str(round(TLlegada[i], 3))+"\t"+str(round(TEspera[i], 3))+"\t"+str(round(TServicio[i], 3))+"\t"+str(round(TSalida[i], 3)))
+        i = i + 1
+    
+Cola1Servidor()
